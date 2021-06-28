@@ -1,45 +1,37 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
+import ScrollToTop from "./component/scrollToTop.js";
 
-import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
-import injectContext from "./store/appContext";
+import Home from "./views/home.js";
+import Demo from "./views/demo.js";
+import Single from "./views/single.js";
+import Details from "./views/details.js";
+import PlanetDetails from "./views/planet_details.js";
+import Store from "./store/appContext.js";
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import { Navbar } from "./component/navbar.js";
 
 //create your first component
-const Layout = () => {
-	//the basename is used when your project is published in a subdirectory and not in the root of the domain
-	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-	const basename = process.env.BASENAME || "";
-
-	return (
-		<div className="d-flex flex-column">
-			<BrowserRouter basename={basename}>
+export class Layout extends React.Component {
+	render() {
+		return (
+			<BrowserRouter>
 				<ScrollToTop>
 					<Navbar />
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
-					</Switch>
-					<Footer />
+					<div>
+						<Switch>
+							<Route exact path="/" component={Home} />
+							<Route path="/demo" component={Demo} />
+							<Route path="/single/:theid" component={Single} />
+							<Route path="/details/:theid" component={Details} />
+							<Route path="/planet_details/:theid" component={PlanetDetails} />
+							<Route render={() => <h1>Not found!</h1>} />
+						</Switch>
+					</div>
 				</ScrollToTop>
 			</BrowserRouter>
-		</div>
-	);
-};
+		);
+	}
+}
 
-export default injectContext(Layout);
+export default Store(Layout);
