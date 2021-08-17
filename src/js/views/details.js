@@ -9,7 +9,7 @@ function Details(props) {
 		<div className="container">
 			<div className="row">
 				<div className="col-6">
-					<img src="http://via.placeholder.com/800x600" className="w-100" alt="description" />
+					<img src="https://picsum.photos/800/600?random" className="w-100" alt="description" />
 				</div>
 				<div className="col-6">
 					<div className="text-center m-3">
